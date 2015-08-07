@@ -1,6 +1,9 @@
+
 # ofxMotionBlurCamera
 OF addon implements "A Reconstruction Filter for Plausible Motion Blur"
 http://graphics.cs.williams.edu/papers/MotionBlurI3D12/
+
+![ofxMotionBlurCamera](https://raw.githubusercontent.com/hanasaan/ofxMotionBlurCamera/master/example/bin/data/motionblur.jpg)
 
 ## Description
 This addon provides simple and easy-to-use motion blur camera.
