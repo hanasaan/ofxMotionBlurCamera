@@ -1,37 +1,6 @@
 #include "ofMain.h"
 #include "ofxMotionBlurCamera.h"
 
-class BoxOld : public ofNode {
-    ofColor color;
-    ofVec3f center;
-    float radius;
-    float velocity;
-    ofVec3f rotationAxis;
-public:
-    BoxOld(ofColor c, ofVec3f cen, ofVec3f initialPos, float v)
-    : color(c), center(cen)
-    {
-        setGlobalPosition(initialPos);
-        radius = (initialPos - center).length();
-        velocity = v;
-        rotationAxis = (initialPos - center).crossed(ofVec3f(1,0,0)).normalized();
-    }
-    
-    void update()
-    {
-        rotateAround(velocity, rotationAxis, center);
-    }
-    
-protected:
-    void customDraw()
-    {
-        ofPushStyle();
-        ofSetColor(color);
-        ofDrawBox(50);
-        ofPopStyle();
-    }
-};
-
 class Box {
     ofColor color;
     float velocity;
@@ -69,7 +38,6 @@ public:
     }
 };
 
-
 //========================================================================
 static const int NUM_BOXES = 300;
 class ofApp : public ofBaseApp{
@@ -93,8 +61,8 @@ public:
         cam.setGlobalPosition(ofVec3f(0, 0, 0));
         cam.setNearClip(1);
         cam.setFarClip(3000);
-        cam.setExposureTime(0.1);
-        cam.setS(16); // smaller is faster.  9 for typical realtime gaming
+        cam.setExposureTime(0.05);
+        cam.setS(17); // smaller is faster.  9 for typical realtime gaming
         
         for (int j=0; j<NUM_BOXES; ++j) {
             float v = ofRandom(0.1, 1.0);
