@@ -49,6 +49,7 @@ class ofApp : public ofBaseApp{
     
     bool bStop;
     bool bEasyCam;
+    bool bSideBySide;
     
     ofVboMesh m;
 public:
@@ -89,6 +90,7 @@ public:
         
         bEasyCam = false;
         bStop = false;
+        bSideBySide = false;
     }
     
     void updateInternal()
@@ -157,9 +159,17 @@ public:
         
         cam.begin();
         drawScene();
-        cam.end(true, !bStop);
+        cam.end(false, !bStop);
         
-        cam.debugDraw();
+        if (bSideBySide) {
+            cam.getFbo().draw(0, 0, 854, 480);
+            cam.getRawFbo().draw(0, 480, 854, 480);
+            ofDrawBitmapStringHighlight("With Motion Blur", 10, 470);
+            ofDrawBitmapStringHighlight("Without Motion Blur", 10, 950);
+        } else {
+            cam.draw(0, 0);
+            cam.debugDraw();
+        }
 
         
         // TODO: move it into update
@@ -172,7 +182,8 @@ public:
             ss << "samples     : " << cam.getS() << endl;
             ss << "-- Key Map --" << endl;
             ss << "[space] : Toggle Pause" << endl;
-            ss << "[e] : Toggle EasyCam";
+            ss << "[e] : Toggle EasyCam" << endl;
+            ss << "[s] : Toggle Side By Side View";
             ofDrawBitmapStringHighlight(ss.str(), 10, 20);
 
         }
@@ -185,6 +196,9 @@ public:
         }
         if (key == 'e') {
             bEasyCam = !bEasyCam;
+        }
+        if (key == 's') {
+            bSideBySide = !bSideBySide;
         }
     }
 };
