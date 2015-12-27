@@ -27,10 +27,10 @@ public:
     void end(bool autodraw, bool update_prev = true);
     
     //explicitly draw current fbo.
-    virtual void draw(float x, float y) { fbo_out.draw(x, y); }
-    virtual void draw(float x, float y, float w, float h)  { fbo_out.draw(x, y, w, h); }
-    virtual float getHeight() { return fbo_out.getHeight(); }
-    virtual float getWidth() { return fbo_out.getWidth(); }
+    virtual void draw(float x, float y) const { fbo_out.draw(x, y); }
+    virtual void draw(float x, float y, float w, float h) const  { fbo_out.draw(x, y, w, h); }
+    virtual float getHeight() const { return fbo_out.getHeight(); }
+    virtual float getWidth() const { return fbo_out.getWidth(); }
 
     ofFbo& getRawFbo() { return fbo_main; }
     ofFbo& getFbo() { return fbo_out; }
